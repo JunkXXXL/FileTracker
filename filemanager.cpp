@@ -18,7 +18,7 @@ FileManager::FileManager(QString file_path)
 States FileManager::check_changes()
 {
     QFileInfo fileInfo = QFileInfo(filePath);
-    qDebug() << lastChanges.time().toString() << " No way " << fileInfo.lastModified().time().toString();
+    qDebug() << fileInfo.fileName();
     if (!fileInfo.isFile())
     {
         return States::NO_FILE;
@@ -32,4 +32,9 @@ States FileManager::check_changes()
         lastChanges = fileInfo.lastModified();
         return States::EXIST_CHANGES;
     }
+}
+
+QString FileManager::get_name()
+{
+
 }

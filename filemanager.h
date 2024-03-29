@@ -15,10 +15,13 @@ class FileManager
 public:
     FileManager(QString file_path);
     States check_changes();
+    QString getName();
+    QDateTime getTimeChanging();
 
 private:
     QString filePath;
     QDateTime lastChanges;
+    QFileInfo fileInfo;
 };
 
 #endif // FILEMANAGER_H
