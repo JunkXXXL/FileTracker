@@ -1,15 +1,12 @@
-#include "../../widget.h/."
-#include "ui_widget.h"
+#include "widget.h"
+#include "QFileInfo"
 
-Widget::Widget(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Widget)
+Widget::Widget(QWidget *parent): QWidget(parent)
 {
-    ui->setupUi(this);
+
 }
 
 Widget::~Widget()
 {
-    delete ui;
 }
 
