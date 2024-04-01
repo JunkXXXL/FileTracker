@@ -12,17 +12,14 @@ SOURCES += \
     console.cpp \
     container.cpp \
     filemanager.cpp \
-    main.cpp \
-    widget.cpp
+    main.cpp
 
 HEADERS += \
     console.h \
     container.h \
-    filemanager.h \
-    widget.h
+    filemanager.h
 
-FORMS += \
-    widget.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -3,9 +3,12 @@
 #include "QString"
 #include "QDebug"
 #include "QDateTime"
+#include "container.h"
 
-class Console
+class Console: public QObject
 {
+Q_OBJECT
+
 private:
     Console();
     ~Console();
@@ -19,9 +22,9 @@ public:
     void printCurrentTime();
 
 public slots:
-    void messageExistChanges();
-    void messageNoChanges();
-    void messageNoFile();
+    void messageExistChanges(FileManager* manager);
+    void messageNoChanges(FileManager* manager);
+    void messageNoFile(FileManager* manager);
 };
 
 #endif // CONSOLE_H

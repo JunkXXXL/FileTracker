@@ -4,7 +4,7 @@
 FileManager::FileManager(QString file_path)
 {
     filePath = file_path;
-    QFileInfo fileInfo = QFileInfo(file_path);
+    fileInfo = QFileInfo(file_path);
     if (fileInfo.isFile())
     {
         lastChanges = fileInfo.lastModified();
@@ -17,8 +17,7 @@ FileManager::FileManager(QString file_path)
 
 States FileManager::check_changes()
 {
-    QFileInfo fileInfo = QFileInfo(filePath);
-    qDebug() << fileInfo.fileName();
+    fileInfo.refresh();
     if (!fileInfo.isFile())
     {
         return States::NO_FILE;
@@ -34,7 +33,12 @@ States FileManager::check_changes()
     }
 }
 
-QString FileManager::get_name()
+QString FileManager::getName() const
 {
+    return fileInfo.fileName();
+}
 
+QDateTime FileManager::getTimeChanging()
+{
+    return lastChanges;
 }

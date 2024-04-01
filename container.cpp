@@ -5,6 +5,11 @@ Container::Container()
     managers = std::list<FileManager*>();
 }
 
+void Container::setCurrentFile(FileManager *file)
+{
+    currentFile = file;
+}
+
 Container &Container::Instance()
 {
     static Container c;
@@ -26,7 +31,19 @@ void Container::check()
     std::list<FileManager*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
-        qDebug() << (int)(*it)->check_changes();
+        int state = (int)(*it)->check_changes();
+        if (state == 0)
+        {
+            emit noFile(currentFile);
+        }
+        else if (state == 1)
+        {
+            emit noChanges(currentFile);
+        }
+        else if (state == 2)
+        {
+            emit existChanges(currentFile);
+        }
     }
 }
 
@@ -44,3 +61,4 @@ void Container::start_tracking(int interval)
         std::this_thread::sleep_for( std::chrono::milliseconds( interval ));
     }
 }
+
