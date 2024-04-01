@@ -31,6 +31,7 @@ void Container::check()
     std::list<FileManager*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
+        currentFile = *it;
         int state = (int)(*it)->check_changes();
         if (state == 0)
         {
