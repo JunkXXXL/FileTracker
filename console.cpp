@@ -19,7 +19,7 @@ Console& Console::Instance()
 void Console::printCurrentTime()
 {
     QDateTime time = QDateTime::currentDateTime();
-    qDebug() << "\nCurrent time " << time.time();
+    qDebug() << "\nCurrent time " << time.time().toString();
 }
 
 void Console::messageExistChanges(FileManager* manager)
@@ -37,14 +37,19 @@ void Console::messageNoFile(FileManager* manager)
     printNoFile(manager->getName());
 }
 
+void Console::messageCurrentTime()
+{
+    printCurrentTime();
+}
+
 void Console::printNoChanges(QString name)
 {
     qDebug() << "File " << name << " doesn't changes";
 }
 
-void Console::printNoFile(QString path)
+void Console::printNoFile(QString name)
 {
-    qDebug() << "File " << path << " not exist";
+    qDebug() << "File " << name << " not exist";
 }
 
 void Console::printExistChanges(QString name)

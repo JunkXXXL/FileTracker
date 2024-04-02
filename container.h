@@ -11,13 +11,11 @@ class Container: public QObject
     Q_OBJECT
 private:
     std::list<FileManager*> managers;
-    FileManager* currentFile;
     void check();
     Container();
     ~Container();
     Container(Container const&);
     Container& operator= (Container const&);
-    void setCurrentFile(FileManager* file);
 
 public:
 
@@ -29,6 +27,7 @@ signals:
     void noFile(FileManager* current);
     void noChanges(FileManager* current);
     void existChanges(FileManager* current);
+    void startCheck();
 };
 
 #endif // CONTAINER_H

@@ -5,11 +5,6 @@ Container::Container()
     managers = std::list<FileManager*>();
 }
 
-void Container::setCurrentFile(FileManager *file)
-{
-    currentFile = file;
-}
-
 Container &Container::Instance()
 {
     static Container c;
@@ -28,22 +23,22 @@ Container::~Container()
 
 void Container::check()
 {
+    emit startCheck();
     std::list<FileManager*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
-        currentFile = *it;
         int state = (int)(*it)->check_changes();
         if (state == 0)
         {
-            emit noFile(currentFile);
+            emit noFile(*it);
         }
         else if (state == 1)
         {
-            emit noChanges(currentFile);
+            emit noChanges(*it);
         }
         else if (state == 2)
         {
-            emit existChanges(currentFile);
+            emit existChanges(*it);
         }
     }
 }

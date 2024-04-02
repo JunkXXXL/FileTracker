@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     Container& cont = Container::Instance();
     Console& console = Console::Instance();
 
+    QObject::connect(&cont, &Container::startCheck, &console, &Console::messageCurrentTime);
     QObject::connect(&cont, &Container::noChanges, &console, &Console::messageNoChanges);
     QObject::connect(&cont, &Container::existChanges, &console, &Console::messageExistChanges);
     QObject::connect(&cont, &Container::noFile, &console, &Console::messageNoFile);

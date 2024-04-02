@@ -25,6 +25,7 @@ public slots:
     void messageExistChanges(FileManager* manager);
     void messageNoChanges(FileManager* manager);
     void messageNoFile(FileManager* manager);
+    void messageCurrentTime();
 };
 
 #endif // CONSOLE_H
