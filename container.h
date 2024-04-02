@@ -1,6 +1,6 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
-#include <list>
+#include <vector>
 #include "filemanager.h"
 #include <thread>
 #include "QDebug"
@@ -10,7 +10,7 @@ class Container: public QObject
 {
     Q_OBJECT
 private:
-    std::list<FileManager*> managers;
+    std::vector<FileManager*> managers;
     void check();
     Container();
     ~Container();
@@ -20,7 +20,8 @@ private:
 public:
 
     static Container& Instance();
-    void add_manager(QString &str);
+    bool add_manager(QString &str);
+    bool remove_manager(QString &str);
     void start_tracking(int interval = 5000);
 
 signals:

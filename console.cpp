@@ -44,7 +44,7 @@ void Console::messageCurrentTime()
 
 void Console::printNoChanges(QString name)
 {
-    qDebug() << "File " << name << " doesn't changes";
+    qDebug() << "File " << name << " didn't changed";
 }
 
 void Console::printNoFile(QString name)

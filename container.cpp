@@ -2,7 +2,7 @@
 
 Container::Container()
 {
-    managers = std::list<FileManager*>();
+    managers = std::vector<FileManager*>();
 }
 
 Container &Container::Instance()
@@ -15,8 +15,8 @@ Container::~Container()
 {
     while (!managers.empty())
     {
-        FileManager* element = managers.front();
-        managers.pop_front();
+        FileManager* element = managers.back();
+        managers.pop_back();
         delete element;
     }
 }
@@ -24,7 +24,7 @@ Container::~Container()
 void Container::check()
 {
     emit startCheck();
-    std::list<FileManager*>::iterator it;
+    std::vector<FileManager*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
         int state = (int)(*it)->check_changes();
@@ -43,10 +43,34 @@ void Container::check()
     }
 }
 
-void Container::add_manager(QString &str)
+bool Container::add_manager(QString &str)
 {
+    std::vector<FileManager*>::iterator it;
+    for (it = managers.begin(); it != managers.end(); it++)
+    {
+        if ((*it)->get_filePath() == str)
+        {
+            return false;
+        }
+    }
     FileManager *new_manager = new FileManager(str);
-    managers.push_front(new_manager);
+    managers.push_back(new_manager);
+    return true;
+}
+
+bool Container::remove_manager(QString &str)
+{
+
+    for (int i = 0; i < (int)managers.size(); i++)
+    {
+        if (managers[i]->get_filePath() == str)
+        {
+            delete managers[i];
+            managers.erase(std::next(managers.begin(), i));
+            return true;
+        }
+        return false;
+    }
 }
 
 void Container::start_tracking(int interval)

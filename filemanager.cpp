@@ -42,3 +42,8 @@ QDateTime FileManager::getTimeChanging()
 {
     return lastChanges;
 }
+
+QString FileManager::get_filePath()
+{
+    return filePath;
+}

@@ -17,9 +17,11 @@ int main(int argc, char *argv[])
     QObject::connect(&cont, &Container::existChanges, &console, &Console::messageExistChanges);
     QObject::connect(&cont, &Container::noFile, &console, &Console::messageNoFile);
 
-    QString str = "C://Users//Lsa32//Desktop//GitLove.txt";
+    QString str = "C://Users//Lsa32//Desktop//a.txt";
     cont.add_manager(str);
     cont.start_tracking();
+    //QString qwer = "ASD";
+    //qDebug() << cont.remove_manager(qwer);
 
     return a.exec();
 }

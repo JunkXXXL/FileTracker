@@ -17,6 +17,7 @@ public:
     States check_changes();
     QString getName() const;
     QDateTime getTimeChanging();
+    QString get_filePath();
 
 private:
     QString filePath;
