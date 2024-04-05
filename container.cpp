@@ -8,6 +8,7 @@ Container::Container()
 Container &Container::Instance()
 {
     static Container c;
+
     return c;
 }
 

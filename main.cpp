@@ -12,13 +12,14 @@ int main(int argc, char *argv[])
     Container& cont = Container::Instance();
     Console& console = Console::Instance();
 
-    QObject::connect(&cont, &Container::startCheck, &console, &Console::messageCurrentTime);
-    QObject::connect(&cont, &Container::noChanges, &console, &Console::messageNoChanges);
-    QObject::connect(&cont, &Container::existChanges, &console, &Console::messageExistChanges);
-    QObject::connect(&cont, &Container::noFile, &console, &Console::messageNoFile);
-
     QString str = "C://Users//Lsa32//Desktop//a.txt";
+    QString str1 = "C://Users//Lsa32//Desktop//b.txt";
+    QString str2 = "C://Users//Lsa32//Desktop//egor.jpg";
     cont.add_manager(str);
+    cont.add_manager(str1);
+    cont.add_manager(str2);
+    cont.remove_manager(str);
+    cont.remove_manager(str);
     cont.start_tracking();
     //QString qwer = "ASD";
     //qDebug() << cont.remove_manager(qwer);

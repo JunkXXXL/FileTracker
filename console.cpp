@@ -2,7 +2,11 @@
 
 Console::Console()
 {
-
+    Container &cont = Container::Instance();
+    QObject::connect(&cont, &Container::startCheck, this, &Console::messageCurrentTime);
+    QObject::connect(&cont, &Container::noChanges, this, &Console::messageNoChanges);
+    QObject::connect(&cont, &Container::existChanges, this, &Console::messageExistChanges);
+    QObject::connect(&cont, &Container::noFile, this, &Console::messageNoFile);
 }
 
 Console::~Console()
