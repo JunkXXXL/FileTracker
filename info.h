@@ -10,19 +10,14 @@ enum class States{
     EXIST_CHANGES
 };
 
-class Info
+class Info: public QFileInfo
 {
 public:
     Info(QString file_path);
     States check_changes();
-    QString getName() const;
-    QDateTime getTimeChanging();
-    QString get_filePath();
 
 private:
-    QString filePath;
     QDateTime lastChanges;
-    QFileInfo fileInfo;
 };
 
 #endif // INFO_H

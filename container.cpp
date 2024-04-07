@@ -22,9 +22,8 @@ Container::~Container()
     }
 }
 
-void Container::check()
+void Container::check(bool all_notification)
 {
-    emit startCheck();
     std::vector<Info*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
@@ -33,7 +32,7 @@ void Container::check()
         {
             emit noFile(*it);
         }
-        else if (state == 1)
+        else if (state == 1 and all_notification)
         {
             emit noChanges(*it);
         }
@@ -49,7 +48,7 @@ bool Container::add_file(QString &str)
     std::vector<Info*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
-        if ((*it)->get_filePath() == str)
+        if ((*it)->filePath() == str)
         {
             return false;
         }
@@ -65,8 +64,9 @@ bool Container::remove_file(QString &str)
 
     for (int i = 0; i < (int)managers.size(); i++)
     {
-        if (managers[i]->get_filePath() == str)
+        if (managers[i]->filePath() == str)
         {
+            emit removeFile(managers[i]);
             delete managers[i];
             managers.erase(std::next(managers.begin(), i));
             return true;

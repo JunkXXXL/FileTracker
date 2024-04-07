@@ -11,7 +11,6 @@ class Container: public QObject
     Q_OBJECT
 private:
     std::vector<Info*> managers;
-    void check();
     Container();
     ~Container();
     Container(Container const&);
@@ -21,14 +20,14 @@ public:
     static Container& Instance();
     bool add_file(QString &str);
     bool remove_file(QString &str);
-    //void start_tracking(int interval = 5000);
+    void check(bool all_notification = false);
 
 signals:
     void addNewFile(Info* current);
+    void removeFile(Info* current);
     void noFile(Info* current);
     void noChanges(Info* current);
     void existChanges(Info* current);
-    void startCheck();
 };
 
 #endif // CONTAINER_H

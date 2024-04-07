@@ -1,13 +1,11 @@
 #include "info.h"
 #include "QDebug"
 
-Info::Info(QString file_path)
+Info::Info(QString file_path) : QFileInfo(file_path)
 {
-    filePath = file_path;
-    fileInfo = QFileInfo(file_path);
-    if (fileInfo.isFile())
+    if (isFile())
     {
-        lastChanges = fileInfo.lastModified();
+        lastChanges = lastModified();
     }
     else
     {
@@ -17,33 +15,18 @@ Info::Info(QString file_path)
 
 States Info::check_changes()
 {
-    fileInfo.refresh();
-    if (!fileInfo.isFile())
+    refresh();
+    if (!isFile())
     {
         return States::NO_FILE;
     }
-    else if (fileInfo.lastModified() == lastChanges)
+    else if (lastModified() == lastChanges)
     {
         return States::NO_CHANGES;
     }
-    else if (fileInfo.lastModified() > lastChanges)
+    else if (lastModified() > lastChanges)
     {
-        lastChanges = fileInfo.lastModified();
+        lastChanges = lastModified();
         return States::EXIST_CHANGES;
     }
-}
-
-QString Info::getName() const
-{
-    return fileInfo.fileName();
-}
-
-QDateTime Info::getTimeChanging()
-{
-    return lastChanges;
-}
-
-QString Info::get_filePath()
-{
-    return filePath;
 }

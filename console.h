@@ -18,6 +18,7 @@ private:
     void printNoFile(QString name);
     void printExistChanges(QString name);
     void printNewFile(QString name);
+    void printRemoveFile(QString name);
 public:
     static Console& Instance();
     void printCurrentTime();
@@ -27,7 +28,8 @@ public slots:
     void messageNoChanges(Info* manager);
     void messageNoFile(Info* manager);
     void messageCurrentTime();
-    void addfile(Info* manager);
+    void messageAddFile(Info* manager);
+    void messageRemoveFile(Info* manager);
 };
 
 #endif // CONSOLE_H

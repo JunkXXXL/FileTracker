@@ -3,6 +3,8 @@
 Console::Console()
 {
     Container &cont = Container::Instance();
+    QObject::connect(&cont, &Container::addNewFile, this, &Console::messageAddFile);
+    QObject::connect(&cont, &Container::removeFile, this, &Console::messageRemoveFile);
     QObject::connect(&cont, &Container::noChanges, this, &Console::messageNoChanges);
     QObject::connect(&cont, &Container::existChanges, this, &Console::messageExistChanges);
     QObject::connect(&cont, &Container::noFile, this, &Console::messageNoFile);
@@ -27,17 +29,17 @@ void Console::printCurrentTime()
 
 void Console::messageExistChanges(Info* manager)
 {
-    printExistChanges(manager->getName());
+    printExistChanges(manager->fileName());
 }
 
 void Console::messageNoChanges(Info* manager)
 {
-    printNoChanges(manager->getName());
+    printNoChanges(manager->fileName());
 }
 
 void Console::messageNoFile(Info* manager)
 {
-    printNoFile(manager->getName());
+    printNoFile(manager->fileName());
 }
 
 void Console::messageCurrentTime()
@@ -45,14 +47,14 @@ void Console::messageCurrentTime()
     printCurrentTime();
 }
 
-void Console::addFile(Info *manager)
+void Console::messageAddFile(Info *manager)
 {
-    printNewFile(manager->getName());
+    printNewFile(manager->fileName());
 }
 
-void Console::removeFile(Info* manager)
+void Console::messageRemoveFile(Info* manager)
 {
-    printRemoveFile(manager->getName());
+    printRemoveFile(manager->fileName());
 }
 
 void Console::printNoChanges(QString name)
