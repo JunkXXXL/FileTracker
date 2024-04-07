@@ -3,7 +3,6 @@
 Console::Console()
 {
     Container &cont = Container::Instance();
-    QObject::connect(&cont, &Container::startCheck, this, &Console::messageCurrentTime);
     QObject::connect(&cont, &Container::noChanges, this, &Console::messageNoChanges);
     QObject::connect(&cont, &Container::existChanges, this, &Console::messageExistChanges);
     QObject::connect(&cont, &Container::noFile, this, &Console::messageNoFile);
@@ -46,6 +45,16 @@ void Console::messageCurrentTime()
     printCurrentTime();
 }
 
+void Console::addFile(Info *manager)
+{
+    printNewFile(manager->getName());
+}
+
+void Console::removeFile(Info* manager)
+{
+    printRemoveFile(manager->getName());
+}
+
 void Console::printNoChanges(QString name)
 {
     qDebug() << "File " << name << " didn't changed";
@@ -61,4 +70,12 @@ void Console::printExistChanges(QString name)
     qDebug() << "File " << name << " changed!!!";
 }
 
+void Console::printNewFile(QString name)
+{
+    qDebug() << "File " << name << " has been added to container";
+}
 
+void Console::printRemoveFile(QString name)
+{
+    qDebug() << "File " << name << " has been removed from container";
+}

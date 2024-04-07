@@ -14,9 +14,10 @@ private:
     ~Console();
     Console(Console const&);
     Console& operator=(Console const&);
-    void printNoChanges(QString path);
-    void printNoFile(QString path);
-    void printExistChanges(QString path);
+    void printNoChanges(QString name);
+    void printNoFile(QString name);
+    void printExistChanges(QString name);
+    void printNewFile(QString name);
 public:
     static Console& Instance();
     void printCurrentTime();
@@ -26,6 +27,7 @@ public slots:
     void messageNoChanges(Info* manager);
     void messageNoFile(Info* manager);
     void messageCurrentTime();
+    void addfile(Info* manager);
 };
 
 #endif // CONSOLE_H
