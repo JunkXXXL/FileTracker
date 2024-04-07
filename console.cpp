@@ -26,17 +26,17 @@ void Console::printCurrentTime()
     qDebug() << "\nCurrent time " << time.time().toString();
 }
 
-void Console::messageExistChanges(FileManager* manager)
+void Console::messageExistChanges(Info* manager)
 {
     printExistChanges(manager->getName());
 }
 
-void Console::messageNoChanges(FileManager* manager)
+void Console::messageNoChanges(Info* manager)
 {
     printNoChanges(manager->getName());
 }
 
-void Console::messageNoFile(FileManager* manager)
+void Console::messageNoFile(Info* manager)
 {
     printNoFile(manager->getName());
 }

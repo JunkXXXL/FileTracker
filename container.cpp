@@ -2,7 +2,7 @@
 
 Container::Container()
 {
-    managers = std::vector<FileManager*>();
+    managers = std::vector<Info*>();
 }
 
 Container &Container::Instance()
@@ -16,7 +16,7 @@ Container::~Container()
 {
     while (!managers.empty())
     {
-        FileManager* element = managers.back();
+        Info* element = managers.back();
         managers.pop_back();
         delete element;
     }
@@ -25,7 +25,7 @@ Container::~Container()
 void Container::check()
 {
     emit startCheck();
-    std::vector<FileManager*>::iterator it;
+    std::vector<Info*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
         int state = (int)(*it)->check_changes();
@@ -44,9 +44,9 @@ void Container::check()
     }
 }
 
-bool Container::add_manager(QString &str)
+bool Container::add_file(QString &str)
 {
-    std::vector<FileManager*>::iterator it;
+    std::vector<Info*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
     {
         if ((*it)->get_filePath() == str)
@@ -54,12 +54,13 @@ bool Container::add_manager(QString &str)
             return false;
         }
     }
-    FileManager *new_manager = new FileManager(str);
+    Info *new_manager = new Info(str);
     managers.push_back(new_manager);
+    emit addNewFile(new_manager);
     return true;
 }
 
-bool Container::remove_manager(QString &str)
+bool Container::remove_file(QString &str)
 {
 
     for (int i = 0; i < (int)managers.size(); i++)
@@ -74,12 +75,12 @@ bool Container::remove_manager(QString &str)
     }
 }
 
-void Container::start_tracking(int interval)
-{
-    while (true)
-    {
-        check();
-        std::this_thread::sleep_for( std::chrono::milliseconds( interval ));
-    }
-}
+//void Container::start_tracking(int interval)
+//{
+//    while (true)
+//    {
+//        check();
+//        std::this_thread::sleep_for( std::chrono::milliseconds( interval ));
+//    }
+//}
 

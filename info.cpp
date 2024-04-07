@@ -1,7 +1,7 @@
-#include "filemanager.h"
+#include "info.h"
 #include "QDebug"
 
-FileManager::FileManager(QString file_path)
+Info::Info(QString file_path)
 {
     filePath = file_path;
     fileInfo = QFileInfo(file_path);
@@ -15,7 +15,7 @@ FileManager::FileManager(QString file_path)
     }
 }
 
-States FileManager::check_changes()
+States Info::check_changes()
 {
     fileInfo.refresh();
     if (!fileInfo.isFile())
@@ -33,17 +33,17 @@ States FileManager::check_changes()
     }
 }
 
-QString FileManager::getName() const
+QString Info::getName() const
 {
     return fileInfo.fileName();
 }
 
-QDateTime FileManager::getTimeChanging()
+QDateTime Info::getTimeChanging()
 {
     return lastChanges;
 }
 
-QString FileManager::get_filePath()
+QString Info::get_filePath()
 {
     return filePath;
 }

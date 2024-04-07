@@ -1,5 +1,5 @@
-#ifndef FILEMANAGER_H
-#define FILEMANAGER_H
+#ifndef INFO_H
+#define INFO_H
 #include "QString"
 #include "QFileInfo"
 #include "QDateTime"
@@ -10,10 +10,10 @@ enum class States{
     EXIST_CHANGES
 };
 
-class FileManager
+class Info
 {
 public:
-    FileManager(QString file_path);
+    Info(QString file_path);
     States check_changes();
     QString getName() const;
     QDateTime getTimeChanging();
@@ -25,4 +25,4 @@ private:
     QFileInfo fileInfo;
 };
 
-#endif // FILEMANAGER_H
+#endif // INFO_H

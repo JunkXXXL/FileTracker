@@ -11,13 +11,13 @@ CONFIG += c++17
 SOURCES += \
     console.cpp \
     container.cpp \
-    filemanager.cpp \
+    info.cpp \
     main.cpp
 
 HEADERS += \
     console.h \
     container.h \
-    filemanager.h
+    info.h
 
 FORMS +=
 

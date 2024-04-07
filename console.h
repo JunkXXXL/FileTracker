@@ -22,9 +22,9 @@ public:
     void printCurrentTime();
 
 public slots:
-    void messageExistChanges(FileManager* manager);
-    void messageNoChanges(FileManager* manager);
-    void messageNoFile(FileManager* manager);
+    void messageExistChanges(Info* manager);
+    void messageNoChanges(Info* manager);
+    void messageNoFile(Info* manager);
     void messageCurrentTime();
 };
 

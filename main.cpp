@@ -12,15 +12,15 @@ int main(int argc, char *argv[])
     Container& cont = Container::Instance();
     Console& console = Console::Instance();
 
+
+    qDebug() << "1) Ввели дважды один файл";
     QString str = "C://Users//Lsa32//Desktop//a.txt";
-    QString str1 = "C://Users//Lsa32//Desktop//b.txt";
-    QString str2 = "C://Users//Lsa32//Desktop//egor.jpg";
-    cont.add_manager(str);
-    cont.add_manager(str1);
-    cont.add_manager(str2);
-    cont.remove_manager(str);
-    cont.remove_manager(str);
-    cont.start_tracking();
+    cont.add_file(str);
+    cont.add_file(str);
+    //cont.
+    //cont.remove_manager(str);
+    //cont.remove_manager(str);
+    //cont.start_tracking();
     //QString qwer = "ASD";
     //qDebug() << cont.remove_manager(qwer);
 
