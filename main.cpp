@@ -6,9 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    //Widget w;
-    //w.show();
+    //QApplication a(argc, argv);
     Container& cont = Container::Instance();
     Console& console = Console::Instance();
 
@@ -23,6 +21,6 @@ int main(int argc, char *argv[])
     //cont.start_tracking();
     //QString qwer = "ASD";
     //qDebug() << cont.remove_manager(qwer);
-
-    return a.exec();
+    return 0;
+    //return a.exec();
 }
