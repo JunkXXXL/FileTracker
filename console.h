@@ -3,7 +3,7 @@
 #include "QString"
 #include "QDebug"
 #include "QDateTime"
-#include "container.h"
+#include "ChangeTracker.h"
 
 class Console: public QObject
 {
@@ -14,13 +14,16 @@ private:
     ~Console();
     Console(Console const&);
     Console& operator=(Console const&);
+    bool print_size = false;
     void printNoChanges(QString name);
     void printNoFile(QString name);
     void printExistChanges(QString name);
     void printNewFile(QString name);
     void printRemoveFile(QString name);
+    void printSize(qint64 size);
 public:
     static Console& Instance();
+    void set_print(bool set_prnt);
     void printCurrentTime();
 
 public slots:

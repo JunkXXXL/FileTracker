@@ -1,4 +1,4 @@
-#include "container.h"
+#include "ChangeTracker.h"
 #include "console.h"
 #include "QDebug"
 #include "info.h"
@@ -10,7 +10,7 @@
 
 void testing(QString& direct)
 {
-    Container& cont = Container::Instance();
+    ChangeTracker& cont = ChangeTracker::Instance();
     Console& console = Console::Instance();
     QString str = direct + "a.txt";
     std::ofstream file_a(str.toStdString());
@@ -59,8 +59,9 @@ void tracking(QString& dir, int interval)
     QString afl = dir + "a.txt";
     QString bfl = dir + "b.txt";
     QString cfl = dir + "c.txt";
-    Container& cont = Container::Instance();
+    ChangeTracker& cont = ChangeTracker::Instance();
     Console& cons = Console::Instance();
+    cons.set_print(true);
 
     std::ofstream file_a(afl.toStdString());
     file_a.close();
@@ -78,7 +79,7 @@ void tracking(QString& dir, int interval)
     while (true)
     {
         cons.printCurrentTime();
-        cont.check();
+        cont.check(true);
         std::this_thread::sleep_for( std::chrono::milliseconds( interval ));
     }
 }

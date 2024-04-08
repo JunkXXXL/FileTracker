@@ -1,18 +1,18 @@
-#include "container.h"
+#include "ChangeTracker.h"
 
-Container::Container()
+ChangeTracker::ChangeTracker()
 {
     managers = std::vector<Info*>();
 }
 
-Container &Container::Instance()
+ChangeTracker &ChangeTracker::Instance()
 {
-    static Container c;
+    static ChangeTracker c;
 
     return c;
 }
 
-Container::~Container()
+ChangeTracker::~ChangeTracker()
 {
     while (!managers.empty())
     {
@@ -22,7 +22,7 @@ Container::~Container()
     }
 }
 
-void Container::check(bool all_notification)
+void ChangeTracker::check(bool all_notification)
 {
     std::vector<Info*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
@@ -43,7 +43,7 @@ void Container::check(bool all_notification)
     }
 }
 
-bool Container::add_file(QString &str)
+bool ChangeTracker::add_file(QString &str)
 {
     std::vector<Info*>::iterator it;
     for (it = managers.begin(); it != managers.end(); it++)
@@ -59,7 +59,7 @@ bool Container::add_file(QString &str)
     return true;
 }
 
-bool Container::remove_file(QString &str)
+bool ChangeTracker::remove_file(QString &str)
 {
 
     for (int i = 0; i < (int)managers.size(); i++)

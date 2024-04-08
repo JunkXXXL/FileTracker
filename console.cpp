@@ -2,12 +2,12 @@
 
 Console::Console()
 {
-    Container &cont = Container::Instance();
-    QObject::connect(&cont, &Container::addNewFile, this, &Console::messageAddFile);
-    QObject::connect(&cont, &Container::removeFile, this, &Console::messageRemoveFile);
-    QObject::connect(&cont, &Container::noChanges, this, &Console::messageNoChanges);
-    QObject::connect(&cont, &Container::existChanges, this, &Console::messageExistChanges);
-    QObject::connect(&cont, &Container::noFile, this, &Console::messageNoFile);
+    ChangeTracker &cont = ChangeTracker::Instance();
+    QObject::connect(&cont, &ChangeTracker::addNewFile, this, &Console::messageAddFile);
+    QObject::connect(&cont, &ChangeTracker::removeFile, this, &Console::messageRemoveFile);
+    QObject::connect(&cont, &ChangeTracker::noChanges, this, &Console::messageNoChanges);
+    QObject::connect(&cont, &ChangeTracker::existChanges, this, &Console::messageExistChanges);
+    QObject::connect(&cont, &ChangeTracker::noFile, this, &Console::messageNoFile);
 }
 
 Console::~Console()
@@ -21,6 +21,11 @@ Console& Console::Instance()
     return c;
 }
 
+void Console::set_print(bool set_prnt)
+{
+    print_size = set_prnt;
+}
+
 void Console::printCurrentTime()
 {
     QDateTime time = QDateTime::currentDateTime();
@@ -30,16 +35,19 @@ void Console::printCurrentTime()
 void Console::messageExistChanges(Info* manager)
 {
     printExistChanges(manager->fileName());
+    if (print_size) printSize(manager->size());
 }
 
 void Console::messageNoChanges(Info* manager)
 {
     printNoChanges(manager->fileName());
+    if (print_size) printSize(manager->size());
 }
 
 void Console::messageNoFile(Info* manager)
 {
     printNoFile(manager->fileName());
+    if (print_size) printSize(manager->size());
 }
 
 void Console::messageCurrentTime()
@@ -50,6 +58,7 @@ void Console::messageCurrentTime()
 void Console::messageAddFile(Info *manager)
 {
     printNewFile(manager->fileName());
+    if (print_size) printSize(manager->size());
 }
 
 void Console::messageRemoveFile(Info* manager)
@@ -80,4 +89,9 @@ void Console::printNewFile(QString name)
 void Console::printRemoveFile(QString name)
 {
     qDebug() << "File " << name << " has been removed from container";
+}
+
+void Console::printSize(qint64 size)
+{
+    qDebug() << "file size " << size << " bytes";
 }
