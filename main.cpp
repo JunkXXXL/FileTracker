@@ -27,7 +27,7 @@ void testing(QString& direct)
 
     qDebug() << "\n3) Проверка, файл не изменялся после добавления";
     cont.add_file(str);
-    cont.check(false);
+    cont.check(true);
 
     qDebug() << "\n4) Проверка, файл изменился";
     std::ofstream of(str.toStdString());
@@ -35,7 +35,7 @@ void testing(QString& direct)
     {
         of << "a";
         of.close();
-        cont.check(false);
+        cont.check(true);
     }
     else
     {
@@ -46,7 +46,7 @@ void testing(QString& direct)
     QFile fl(str);
     if (fl.remove())
     {
-        cont.check(false);
+        cont.check(true);
     }
     else
     {
