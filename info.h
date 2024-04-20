@@ -7,7 +7,8 @@
 enum class States{
     NO_FILE=0,
     NO_CHANGES,
-    EXIST_CHANGES
+    EXIST_CHANGES,
+    NOTHING_NEW
 };
 
 class Info: public QFileInfo
@@ -18,6 +19,7 @@ public:
 
 private:
     QDateTime lastChanges;
+    States lastState = States::NO_FILE;
 };
 
 #endif // INFO_H

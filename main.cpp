@@ -66,9 +66,9 @@ void tracking(QString& dir, int interval)
     std::ofstream file_a(afl.toStdString());
     file_a.close();
     std::ofstream file_b(bfl.toStdString());
-    file_a.close();
+    file_b.close();
     std::ofstream file_c(cfl.toStdString());
-    file_a.close();
+    file_c.close();
 
     if (!cont.add_file(bfl) or !cont.add_file(afl) or !cont.add_file(cfl))
     {
